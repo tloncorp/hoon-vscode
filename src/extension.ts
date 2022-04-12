@@ -10,7 +10,7 @@ import {
   LanguageClientOptions,
   ServerOptions,
   TransportKind,
-  Executable
+  Executable,
 } from "vscode-languageclient";
 
 let client: LanguageClient;
@@ -21,13 +21,16 @@ export function activate(context: ExtensionContext) {
   const port: number = configuration.get("port");
   const delay: number = configuration.get("delay");
   const enabled: boolean = configuration.get("enabled");
+  const code: string = configuration.get("code");
+  const ship: string = configuration.get("planet");
+
   if (!enabled) {
     return;
   }
   // Server must be in $PATH
   let serverExecutable: Executable = {
     command: "hoon-language-server",
-    args: [`--port ${port}`, `--delay ${delay}`]
+    args: [`-p='${port}'`, `-d='${delay}'`, `-s='${ship}'`, `-c='${code}'`],
   };
 
   // If the extension is launched in debug mode then the debug server options are used
@@ -37,7 +40,7 @@ export function activate(context: ExtensionContext) {
   // Options to control the language client
   let clientOptions: LanguageClientOptions = {
     // Register the server for documents
-    documentSelector: [{ language: "hoon", scheme: "file" }]
+    documentSelector: [{ language: "hoon", scheme: "file" }],
   };
 
   // Create the language client and start the client.
