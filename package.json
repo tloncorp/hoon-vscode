@@ -61,7 +61,19 @@
                     "default": "500",
                     "scope": "window",
                     "description": "Time in ms to wait before sending save events"
-                }
+                },
+                "hoon.languageServer.ship": {
+					"type": "string",
+					"default": "~sampel-palnet",
+					"scope": "window",
+					"description": "Your ship's name"
+				},
+				"hoon.languageServer.code": {
+					"type": "string",
+					"default": "~sampel-palnet-sampel-palnet",
+					"scope": "window",
+					"description": "Your ship's +code"
+				}
             }
         }
     },

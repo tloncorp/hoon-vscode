@@ -22,7 +22,7 @@ export function activate(context: ExtensionContext) {
   const delay: number = configuration.get("delay");
   const enabled: boolean = configuration.get("enabled");
   const code: string = configuration.get("code");
-  const ship: string = configuration.get("planet");
+  const ship: string = configuration.get("ship");
 
   if (!enabled) {
     return;
