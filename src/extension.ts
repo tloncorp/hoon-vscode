@@ -18,7 +18,7 @@ let client: LanguageClient;
 export function activate(context: ExtensionContext) {
   const configuration = workspace.getConfiguration("hoon.languageServer");
 
-  const url: number = configuration.get("url");
+  const url: string = configuration.get("url");
   const port: number = configuration.get("port");
   const delay: number = configuration.get("delay");
   const enabled: boolean = configuration.get("enabled");
