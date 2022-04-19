@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 
-import { workspace, ExtensionContext } from "vscode";
+import { window, workspace, ExtensionContext } from "vscode";
 
 import {
   LanguageClient,
@@ -18,6 +18,7 @@ let client: LanguageClient;
 export function activate(context: ExtensionContext) {
   const configuration = workspace.getConfiguration("hoon.languageServer");
 
+  const url: number = configuration.get("url");
   const port: number = configuration.get("port");
   const delay: number = configuration.get("delay");
   const enabled: boolean = configuration.get("enabled");
@@ -30,7 +31,7 @@ export function activate(context: ExtensionContext) {
   // Server must be in $PATH
   let serverExecutable: Executable = {
     command: "hoon-language-server",
-    args: [`-p='${port}'`, `-d='${delay}'`, `-s='${ship}'`, `-c='${code}'`],
+    args: [`-u=${url}`, `-p=${port}`, `-d=${delay}`, `-s=${ship}`, `-c=${code}`],
   };
 
   // If the extension is launched in debug mode then the debug server options are used

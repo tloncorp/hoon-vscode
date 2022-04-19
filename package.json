@@ -1,10 +1,10 @@
 {
-    "name": "hoon",
+    "name": "hoon-tloncorp",
     "displayName": "Hoon",
     "description": "Language support for the Hoon language",
-    "version": "0.1.3",
-    "publisher": "urbit",
-    "repository": "https://github.com/famousj/hoon-vscode.git",
+    "version": "0.2.0",
+    "publisher": "tloncorp",
+    "repository": "https://github.com/tloncorp/hoon-vscode.git",
     "icon": "images/urbit.png",
     "engines": {
         "vscode": "^1.33.0"
@@ -12,7 +12,7 @@
     "categories": [
         "Programming Languages"
     ],
-    "main": "./out/extension",
+    "main": "./out/main",
     "activationEvents": [
         "onLanguage:hoon"
     ],
@@ -50,6 +50,12 @@
                     "scope": "window",
                     "description": "Enable Language Server"
                 },
+                "hoon.languageServer.url": {
+                    "type": "string",
+                    "default": "http://localhost",
+                    "scope": "window",
+                    "description": "Your Urbit's url"
+                },
                 "hoon.languageServer.port": {
                     "type": "integer",
                     "default": "8080",
@@ -63,17 +69,17 @@
                     "description": "Time in ms to wait before sending save events"
                 },
                 "hoon.languageServer.ship": {
-					"type": "string",
-					"default": "~sampel-palnet",
-					"scope": "window",
-					"description": "Your ship's name"
-				},
-				"hoon.languageServer.code": {
-					"type": "string",
-					"default": "~sampel-palnet-sampel-palnet",
-					"scope": "window",
-					"description": "Your ship's +code"
-				}
+                    "type": "string",
+                    "default": "~sampel-palnet",
+                    "scope": "window",
+                    "description": "Your ship's name"
+                },
+                "hoon.languageServer.code": {
+                    "type": "string",
+                    "default": "~sampel-palnet-sampel-palnet",
+                    "scope": "window",
+                    "description": "Your ship's +code"
+                }
             }
         }
     },
@@ -81,16 +87,21 @@
         "vscode:prepublish": "npm run update-vscode && npm run build",
         "update-vscode": "vscode-install",
         "postinstall": "vscode-install",
-        "build": "tsc",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "test-compile": "tsc -p ./",
+        "build": "npm run esbuild-base -- --minify",
         "clean": "rm -rf out",
         "watch": "tsc -w"
     },
     "dependencies": {
-        "hoon-language-server": "^0.1.0",
+        "@urbit/hoon-language-server": "^0.1.0",
         "vscode-languageclient": "^5.2.1"
     },
     "devDependencies": {
         "@types/node": "^13.13.32",
+        "esbuild": "^0.14.36",
         "typescript": "^4.1.2",
         "vscode": "^1.1.37"
     }
