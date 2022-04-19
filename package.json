@@ -2,7 +2,7 @@
     "name": "hoon-tloncorp",
     "displayName": "Hoon",
     "description": "Language support for the Hoon language",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "tloncorp",
     "repository": "https://github.com/tloncorp/hoon-vscode.git",
     "icon": "images/urbit.png",
