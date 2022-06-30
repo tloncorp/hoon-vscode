@@ -26,5 +26,5 @@
         ["'", "'"]
     ],
     // defines what is considered to be a word in the programming language
-    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\_\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)"
+    "wordPattern": "[a-z]([a-z0-9-]*)?"
 }
